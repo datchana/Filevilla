@@ -86,7 +86,7 @@ class FileVilla(LoginRequiredMixin, View):
   def get(self, request):
     name = request.GET.get('name')
     content_type = request.GET.get('content_type')
-    storage_client = storage.Client.from_service_account_json(str(BASE_DIR) + '\eternal-calling-287810-b0e92f492121.json')
+    storage_client = storage.Client.from_service_account_json(str(BASE_DIR) + '/eternal-calling-287810-b0e92f492121.json')
     blobs = storage_client.list_blobs('filevilla')
     if name and content_type:
       tmp_file = str(BASE_DIR) + '/tmp/' + name
@@ -110,7 +110,7 @@ class FileVilla(LoginRequiredMixin, View):
       filevilla = request.FILES.get('filevilla')
       path = default_storage.save(filevilla._name, ContentFile(filevilla.read()))
       tmp_file = os.path.join(BASE_DIR, path)
-      storage_client = storage.Client.from_service_account_json(str(BASE_DIR) + '\eternal-calling-287810-b0e92f492121.json')
+      storage_client = storage.Client.from_service_account_json(str(BASE_DIR) + '/eternal-calling-287810-b0e92f492121.json')
       bucket = storage_client.get_bucket('filevilla')
       blob = bucket.blob(filevilla._name)
       try:
